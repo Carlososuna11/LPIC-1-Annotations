@@ -4,9 +4,9 @@
 
 Comprende los siguientes ítems:
 
-- [101.1: Determinar y configurar los ajustes de hardware](#101.1-determinar-y-configurar-los-ajustes-de-hardware)
-- [101.2: Arrancar del sistema](#101.2-arrancar-del-sistema)
-- [101.3: Cambiar niveles de ejecución/destinos de arranque y apagar o reiniciar el sistema](#cambiar-niveles-de-ejecucióndestinos-de-arranque-y-apagar-o-reiniciar-el-sistema)
+- [101.1: Determinar y configurar los ajustes de hardware](#1011-determinar-y-configurar-los-ajustes-de-hardware)
+- [101.2: Arrancar del sistema](#1012-arrancar-del-sistema)
+- [101.3: Cambiar niveles de ejecución/destinos de arranque y apagar o reiniciar el sistema](#1013-cambiar-niveles-de-ejecucióndestinos-de-arranque-y-apagar-o-reiniciar-el-sistema)
 
 ### 101.1: Determinar y configurar los ajustes de hardware
 
@@ -39,7 +39,7 @@ Visualización de archivos virtuales en el directorio `/proc`:
 
 - **Directorio `/sys`**: En este información variada sobre directorio encontramos dispositivos. Entre estos datos podemos ver el estado de los mismos (en funcionamiento o no), el fabricante, el modelo y el bus a que estań conectados. Al igual que el `/proc` proveen información del kernel relativa a eventos del sistema operativo.
 
-- **Directorio `/dev`**: Es una parte del árbol de directorios Linux compuesta por un sistema de archivos virtual, llamados `devfs`, que dinámicamente crea directorios y archivos para presentar una estructura jerarquizada de accesos a diversas características del sistema.
+- **Directorio `/dev` (Devices)**: Es una parte del árbol de directorios Linux compuesta por un sistema de archivos virtual, llamados `devfs`, que dinámicamente crea directorios y archivos para presentar una estructura jerarquizada de accesos a diversas características del sistema.
 
 Algunos de los archivos que podemos encontrar en el directorio `/dev` son:
 
@@ -53,9 +53,30 @@ Algunos de los archivos que podemos encontrar en el directorio `/dev` son:
 - `/dev/tty1`: primer terminal de consola.
 - `/dev/tty2`: segundo terminal de consola.
 - `/dev/lp0`: primer puerto paralelo (impresora).
+- `/dev/snd0`: primera tarjeta de sonido.
+- `/dev/ht`: tape backup ide.
+- `/dev/st`: tape backup sata.
+- `/dev/eth`: tarjeta de red fisica.
+- `/dev/wlan` o `/dev/vlan`: wifi - inalambricas.
+- `/dev/cdrom` o `/dev/cdrecorder`: Lectoras ide.
+- `/dev/sr`: Lectoras sata.
 - `/dev/null`: archivo especial que descarta todo lo que se le envía.
 - `/dev/zero`: archivo especial que contiene ceros.
 - `/dev/full`: archivo especial que devuelve código de error `ENOSPC`
+
+
+
+**Nota**: Solo hay dos unidades físicas extraibles cuya nomenclatura empiezan siempre con 1 y no con 0. **Los discos duros** y **Consolas terminales (tty)**.
+
+Linux lee su información física usando puntos de montaje.
+
+**Punto de Montaje**: Un punto de montaje, un directorio, es una noción que remite a contenidos, y que  presupone la existencia de una partición en donde poder alojarse. Podemos crear tantos puntos de montaje, o directorios, como el espacio en nuestro disco nos lo permita.
+
+Hay un orden jerárquico entre particiones y puntos de montaje: Las primeras pueden existir solas; los segundos, no. Podemos tener particiones vacías, pero no podremos colocar ningún punto de montaje en nuestro disco si antes no creamos una partición. Una partición acepta varios puntos de montaje; un mismo punto de montaje no puede estar en más de una partición.
+
+```bash
+mount /dev/XXX <path-to-folder>
+```
 
 **Directorio `/dev/null`**: Leer desde `/dev/null` devuelve siempre error de fin de archivo (EOF). Escribir en `/dev/null` descarta todo lo que se le envía (se realiza el proces de lectura desde la fuente, pero no se realiza ningún proceso de escritura).
 
@@ -78,6 +99,7 @@ bash: /dev/full: No space left on device
 
 La herramienta lsmod no admite opciones, su única misión es leer el contenido de `/proc/modules` e imprimir un listado formateado en pantalla. Las tres columnas que se muestran son:
 
+
 - `Module`: Nombre del módulo.
 - `Size`: Tamaño del módulo en bytes.
 - `Used by`: Módulos que dependen de este módulo. Arroja un valor numérico que indica cuántas instancias del módulo se estan usando. Si el valor es 0, significa que el módulo no está en uso. Lo siguiente al número indica lo que está utilizando el módulo.
@@ -96,6 +118,8 @@ ip_vs                 163840  6 ip_vs_rr,ip_vs_sh,ip_vs_wrr
 xt_mark                16384  12
 ...
 ```
+
+Módulo más conocido: `e1000`.
 
 **Comando lspci**: Es una herramienta que muestra la información acerca de las ranuras PCI (Peripheral Component Interconnect) en el sistema. La información que muestra es la siguiente:
 
@@ -181,6 +205,15 @@ $ dmesg
 [31504.918189] rtw_8822be 0000:02:00.0: firmware failed to leave lps state
 ```
 
+Caso de Uso: Depurar problemas en la computadora.
+
+Ejemplo: Problema de conectividad de red
+
+```console
+dmesg | grep -i network
+```
+
+
 **`SystemD`**: Es el administrador de servicios y sistemas en Linux, y la estandarización de la mayoría de distribuciones de Debian y Red Hat. SystemD fue desarrollado con el objetivo de encargarse de arrancar todo lo que está por debajo del Kernel, permitiendo ejecutar varios procesos de manera simultánea. Además, permite un seguimiento de procesos a través del uso de grupos de control del sistema operativo Linux.
 
 **Comando `journalctl`**: Con la llegada de systemd, el comando `journalctl` se ha convertido en el comando por defecto para ver los logs del sistema. Es un comando muy potente que nos permite filtrar los logs por fecha, por tipo de mensaje, por usuario, por servicio, etc. Además, nos permite ver los logs en tiempo real, es decir, ver los logs que se van generando en tiempo real. Por ejemplo, si queremos ver los logs en tiempo real, podemos ejecutar el siguiente comando:
@@ -189,7 +222,7 @@ $ dmesg
 journalctl -f
 ```
 
-El comando `journalctl` es la herramienta más usada para acceder a los registros del sistema y en esta entrada.
+El comando `journalctl` es la herramienta más usada para acceder a los registros del sistema y en esta entrada. Es lo mismo que `dmesg` pero aplicado para servicios.
 
 ```bash
 $ journalctl
@@ -248,6 +281,13 @@ El contenido del sistema de archivos `initramfs` se obtiene creando un fichero `
 El primer proceso que inicia el kernel es `init`, y se mantiene activo mientras la máquina siga en funcionamiento, es el proceso principal.
 
 La gran mayoría de distros Linux utilizaban `SysV`, y aunque se crearon otras alternativas como `Service Management`, `Upstart`, etc, ninguna llegó a implantarse en masa. Hasta que llegó Systemd y fue adoptada por la gran mayoría de distros, debemos reconocer que el `SysVinit` actual es una herramienta en desuso.
+
+mostrar proceso init
+```bash
+ps ax | grep -i init
+```
+
+En el caso de algunos sistemas operativos, este es llamado systemd. Siempre será el proceso `1`.
 
 **Systemd**: Es un gestor del sistema y de los servicios para Linux, compatible con los initscript SysV y LSB. systemd proporciona una notable capacidad de paralelización, utiliza la activación de socket y D- Bus para iniciar los servicios, permite el inicio de los demonios bajo demanda, realiza un seguimiento de los procesos con el uso de los grupos de control de Linux, apoya snapshotting y la restauración del estado del sistema, mantiene los puntos montaje y servicios de montaje automático e implementa un elaborado sistema de gestión de dependencias basado en un control lógico de los servicios.
 
