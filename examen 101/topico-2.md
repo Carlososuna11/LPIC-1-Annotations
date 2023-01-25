@@ -534,6 +534,15 @@ La virtualización es una tecnología que permite que una plataforma de software
 
 - **Paravirtualizado**: Es aquel en el que el sistema operativo invitado no es consciente de que se trata de una instancia de máquina virtual en ejecución.
 
+Referencias:
+https://www.ibm.com/mx-es/cloud/learn/hypervisors
+https://kryptonsolid.com/cual-es-la-diferencia-entre-el-hipervisor-tipo-1-y-el-tipo-2/
+https://www.redhat.com/es/topics/virtualization/what-is-a-hypervisor
+https://es.wikipedia.org/wiki/Hipervisor
+https://www.nutanix.com/mx/info/hypervisor
+https://www.muycomputer.com/2020/03/27/hipervisor-virtualbox-vmware-hyperv/
+
+
 #### SSH Host Key
 
 En SSH, se utiliza un par de claves, llamadas claves de host, para identificar una computadora. El propósito del par de claves SSH es para autenticar computadoras. Las claves de host son únicas y se generan utilizando algoritmos de cifrado asimétrico como los algoritmos RSA, DSA o ECDSA. Las claves de host públicas se distribuyen a los clientes SSH y las claves privadas se almacenan en los servidores SSH.
