@@ -557,6 +557,5 @@ En Unix/Linux OpenSSH, la colección de claves de host conocidas se almacena en 
 
 Actividades complementarias:
 
-- [Realizar el examen del tópico 2]()
-- [Práctica de ejercicios del tópico 2]()
-- [Leer Libros digitales del capítulo tratado]()
+- [Realizar el examen del tópico 2](https://www.goconqr.com/es/quiz/11854057/examen-101-lpi-chapter-2-managing-software)
+- [Práctica de ejercicios del tópico 2](laboratorio-2.md)
