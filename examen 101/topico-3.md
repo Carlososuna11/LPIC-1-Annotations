@@ -6,19 +6,19 @@ Comprende los siguientes ítems:
 
 – [103.1 Trabajar en la línea de comandos.](#1031-trabajar-en-la-línea-de-comandos)
 
-– 103.2 Procesar las cadenas de texto utilizando filtros.
+– [103.2 Procesar las cadenas de texto utilizando filtros.](#1032-procesar-las-cadenas-de-texto-utilizando-filtros)
 
-– 103.3 Realizar la administración del archivo y del directorio básicos.
+– [103.3 Realizar la administración del archivo y del directorio básicos.](#1033-realizar-la-administración-del-archivo-y-del-directorio-básicos)
 
-– 103.4 Usar secuencias, tuberías y redirecciones.
+– [103.4 Usar secuencias, tuberías y redirecciones.](#1034-usar-secuencias-tuberías-y-redirecciones)
 
-– 103.5 Crear, monitorear y liquidar procesos.
+– [103.5 Crear, monitorear y liquidar procesos.](#1035-crear-monitorear-y-liquidar-procesos)
 
-– 103.6 Modificar las prioridades para la ejecución de los procesos.
+– [103.6 Modificar las prioridades para la ejecución de los procesos.](#1036-modificar-las-prioridades-para-la-ejecución-de-procesos)
 
-– 103.7 Buscar los archivos de texto utilizando expresiones normales.
+– [103.7 Buscar los archivos de texto utilizando expresiones normales.](#1037-buscar-los-archivos-de-texto-utilizando-expresiones-normales)
 
-– 103.8 Realizar las operaciones básicas de edición de archivos utilizando vi.
+– [103.8 Realizar las operaciones básicas de edición de archivos utilizando vi.](#1038-realizar-las-operaciones-básicas-de-edición-de-archivos-utilizando-vi)
 
 ### 103.1 Trabajar en la línea de comandos.
 
@@ -770,6 +770,7 @@ Si uno o más procesos usan muchos recursos del sistema, Usted puede cambiar las
 ```bash
 renice [prioridad] [[-p] [pid]...] [[-g] [gid]...] [[-u] [uid]...]
 ```
+
 Resumiendo, las opciones soportadas por renice son:
 
 - `-g`: Forzar que los parámetros de quién sean interpretados como ID's de grupo de proceso.
@@ -791,9 +792,11 @@ nice -n 5 ls
 ```
 
 Ejemplo
+
 ```bash
 dd if=/dev/cdrom of=~/ubuntu-17.04-desktop-amd64.iso
 ```
+
 En algunos sistemas con un CD-ROM común, el proceso de la copia de un volumen grande de información puede utilizar muchos recursos del sistema y olvidábamos que en ese momento el usuario está haciendo labores ofimáticas como por ejemplo trabajos con documentos de miles de hojas en `LibreOffice`, un verdadero tragón de recursos. El usuario puede hacer el respaldo del DVD sin afectar el rendimiento de `LibreOffice`. Para esto puede ejecutar el comando `dd` con una prioridad baja usando nice.
 
 ```bash
@@ -814,7 +817,7 @@ La sintaxis del comando grep al buscar un solo archivo es así
 grep [opciones] [patrón] [archivo]
 ```
 
-Donde 
+Donde
 
 - `grep`: Es el comando.
 - `[opciones]`: Son las opciones que se pueden utilizar.
@@ -826,6 +829,7 @@ Donde
 ```bash
 grep [consulta] [archivo]
 ```
+
 Donde `[consulta]` es la palabra que se desea buscar y `[archivo]` es el archivo donde se desea buscar la palabra.
 
 Encontrar una palabra sin tener en cuenta las mayúsculas y minúsculas, para hacer esto, se utiliza la opción `-i`:
@@ -859,16 +863,19 @@ grep [consulta1] [archivo] | grep [consulta2] [archivo]
 ```
 
 #### Comando `sed`
+
 El comando sed es un editor de texto no interactivo. El comando sed de Linux edita datos basado en las reglas que tú le proporciones, puedes utilizarlo de la siguiente forma
 
 ```bash
 $ sed options file
 ```
+
 Además, no tienes la limitación de utilizar sed solo para manipular archivos, también puedes aplicarlo directamente al `stdin` de la siguiente forma
 
 ```bash
 $ echo "Welcome to LinuxHint" | sed 's/Linux/Unix/'
 ```
+
 El comando sed reemplaza el primer patrón de texto con el segundo. En este caso, la cadena de texto "Linux" se reemplaza con "Unix".
 
 Archivo cuyo contenido es "This is another test". Para ejecutar múltiples comandos sed, puedes utilizar la opción `-e` de la siguiente forma:
@@ -876,6 +883,7 @@ Archivo cuyo contenido es "This is another test". Para ejecutar múltiples coman
 ```bash
 $ sed -e 's/This/That/' -e 's/test/example/' file
 ```
+
 Los resultados son impresos en la pantalla instantáneamente, no tienes que esperar que se procese el archivo para terminar.
 
 ### 103.8 Realizar las operaciones básicas de edición de archivos utilizando `vi`.
@@ -893,3 +901,8 @@ El editor vi tiene dos modos de operación:
 - **Modo de Comando**: En este modo, se pueden ejecutar comandos para moverse por el archivo, borrar, copiar, pegar, etc. Para entrar en este modo, presiona la tecla `ESC`.
 
 - **Modo de Inserción**: En este modo, se puede escribir texto. Para entrar en este modo, presiona la tecla `i`.
+
+Actividades complementarias:
+
+- [Realizar el examen del tópico 3](https://www.goconqr.com/es/quiz/11868178/examen-101-lpi-chapter-3-configuring-hardware)
+- [Práctica de ejercicios del tópico 3](laboratorio-3.md)
