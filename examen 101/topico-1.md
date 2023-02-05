@@ -370,6 +370,5 @@ Estos archivos se cargan desde varias ubicaciones, pero los principales son:
 **Fin del Tópico 1**
 
 Actividades complementarias:
-- [Realizar el examen del tópico 1]()
-- [Práctica de ejercicios del tópico 1]()
-- [Leer Libros digitales del capítulo tratado]()
+- [Realizar el examen del tópico 1](https://www.goconqr.com/es/quiz/14594463/examen-101-lpi-chapter-1-exploring-linux-command-line-tools)
+- [Práctica de ejercicios del tópico 1](laboratorio-1.md)
